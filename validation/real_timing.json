@@ -1,0 +1,11 @@
+{
+  "environment": "Python 3.13.5, Linux",
+  "configured_interval_seconds": 5.0,
+  "configured_total_readings": 10,
+  "observed_raw_records": 10,
+  "returncode": 0,
+  "measured_acquisition_seconds": 50.00168818099996,
+  "measured_process_wall_seconds": 50.726430849999986,
+  "source": "Completed reference: config/simulation_10_readings.json",
+  "note": "Real clocks and actual sleeping; not the fake-clock unit test."
+}
