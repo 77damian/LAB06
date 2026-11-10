@@ -1,0 +1,159 @@
+test_C1_new_record_and_formula (exercise_tasks.TaskChecks.test_C1_new_record_and_formula)
+Calibration changes only value and leaves the original record untouched. ... ok
+test_E1_empty_inventory (exercise_tasks.TaskChecks.test_E1_empty_inventory)
+An empty file has no start time, rooms or measurement series. ... ok
+test_E1_inventory (exercise_tasks.TaskChecks.test_E1_inventory)
+The full file contains six series, not one mixed stream of comparable values. ... ok
+test_L1_append_log_without_duplicate_handlers (exercise_tasks.TaskChecks.test_L1_append_log_without_duplicate_handlers)
+Two setups produce two messages, not lost history or duplicated handlers. ... INFO | exercise | first-marker
+INFO | exercise | second-marker
+ok
+test_R1_empty_and_wrong_container (exercise_tasks.TaskChecks.test_R1_empty_and_wrong_container)
+An empty array is valid; an object is not the agreed array format. ... ok
+test_R1_json_matches_csv (exercise_tasks.TaskChecks.test_R1_json_matches_csv)
+Different serialisation must not change the measurements. ... ok
+test_R2_blank_lines_and_bad_line (exercise_tasks.TaskChecks.test_R2_blank_lines_and_bad_line)
+Skip blank lines; do not silently skip a damaged measurement. ... ok
+test_R2_jsonl_matches_csv (exercise_tasks.TaskChecks.test_R2_jsonl_matches_csv)
+The line-based reader obeys the same record contract. ... ok
+test_S1_statistics_and_small_samples (exercise_tasks.TaskChecks.test_S1_statistics_and_small_samples)
+Check sample, not population, standard deviation and both warm-up cases. ... ok
+test_S2_grouped_statistics (exercise_tasks.TaskChecks.test_S2_grouped_statistics)
+A single output file may contain separate summaries, never a mixed-unit mean. ... ok
+test_W1_csv_round_trip (exercise_tasks.TaskChecks.test_W1_csv_round_trip)
+Your CSV output must remain input to the same project. ... ok
+test_W2_jsonl_round_trip (exercise_tasks.TaskChecks.test_W2_jsonl_round_trip)
+Replace a snapshot rather than appending duplicate old readings. ... ok
+test_X1_invalid_choices (exercise_tasks.TaskChecks.test_X1_invalid_choices)
+Reject typos and wrong value types before any output is opened. ... ok
+test_X1_missing_and_unknown_keys (exercise_tasks.TaskChecks.test_X1_missing_and_unknown_keys)
+A misspelled field must not be silently ignored. ... ok
+test_X1_valid_config_unchanged (exercise_tasks.TaskChecks.test_X1_valid_config_unchanged)
+Checking configuration is a pure operation; it must not rewrite your input. ... ok
+test_X2_load_config (exercise_tasks.TaskChecks.test_X2_load_config)
+The supplied assembly should work as soon as X1 and X2 work. ... ok
+test_X2_paths_and_original (exercise_tasks.TaskChecks.test_X2_paths_and_original)
+Resolve paths beside the config file, without changing the settings dictionary. ... ok
+test_X2_reject_path_collisions (exercise_tasks.TaskChecks.test_X2_reject_path_collisions)
+Prevent a simple filename mistake from overwriting raw data. ... ok
+test_X3_disabled_and_empty (exercise_tasks.TaskChecks.test_X3_disabled_and_empty)
+Disabling calibration is explicit; an empty selection remains empty. ... ok
+test_X3_pure_pipeline (exercise_tasks.TaskChecks.test_X3_pure_pipeline)
+Pass a one-use iterator; select first, calibrate once, then summarise. ... ok
+test_bad_csv_reports_line (test_baseline.BaselineChecks.test_bad_csv_reports_line)
+Fail-fast means the error identifies the first bad row, not every bad row. ... ok
+test_basic_statistics (test_baseline.BaselineChecks.test_basic_statistics)
+Check the numbers that the first run displays. ... ok
+test_calibration_formula (test_baseline.BaselineChecks.test_calibration_formula)
+The worked scalar example applies scale before adding offset. ... ok
+test_empty_selection (test_baseline.BaselineChecks.test_empty_selection)
+Missing observations must not become invented zero measurements. ... ok
+test_imports_are_quiet (test_baseline.BaselineChecks.test_imports_are_quiet)
+Importing modules must not start a run or create files. ... ok
+test_invalid_time_and_units (test_baseline.BaselineChecks.test_invalid_time_and_units)
+There is no implicit timezone or unit-conversion policy in this stage. ... ok
+test_invalid_values (test_baseline.BaselineChecks.test_invalid_values)
+Reject absent, boolean and non-finite measurements at the input boundary. ... ok
+test_json_writer (test_baseline.BaselineChecks.test_json_writer)
+Save and reload a result; reject NaN without truncating an old snapshot. ... ok
+test_parser_does_not_mutate (test_baseline.BaselineChecks.test_parser_does_not_mutate)
+Parsing creates a fresh dictionary instead of changing the source row. ... ok
+test_series_selection (test_baseline.BaselineChecks.test_series_selection)
+Use the complete identity and consume a one-use iterator correctly. ... ok
+test_three_values (test_baseline.BaselineChecks.test_three_values)
+The first dataset is small enough for you to inspect by hand. ... ok
+test_unknown_format (test_baseline.BaselineChecks.test_unknown_format)
+An unsupported format is an error, not an empty dataset. ... ok
+test_all_supplied_configs (test_generator_extension.ConfigurationChecks.test_all_supplied_configs) ... ok
+test_config_and_log_collision_prevents_writes (test_generator_extension.ConfigurationChecks.test_config_and_log_collision_prevents_writes) ... ok
+test_humidity_and_pressure_means (test_generator_extension.ConfigurationChecks.test_humidity_and_pressure_means) ... ok
+test_invalid_counts_and_window_sizes (test_generator_extension.ConfigurationChecks.test_invalid_counts_and_window_sizes) ... ok
+test_invalid_modes_and_non_object (test_generator_extension.ConfigurationChecks.test_invalid_modes_and_non_object) ... ok
+test_invalid_numerical_settings (test_generator_extension.ConfigurationChecks.test_invalid_numerical_settings) ... ok
+test_new_session_never_overwrites_previous (test_generator_extension.ConfigurationChecks.test_new_session_never_overwrites_previous) ... ok
+test_old_default_and_new_files_mode_match (test_generator_extension.ConfigurationChecks.test_old_default_and_new_files_mode_match) ... ok
+test_recording_directory_cannot_be_log_file (test_generator_extension.ConfigurationChecks.test_recording_directory_cannot_be_log_file) ... ok
+test_selection_must_exist_and_identifiers_are_exact (test_generator_extension.ConfigurationChecks.test_selection_must_exist_and_identifiers_are_exact) ... ok
+test_strict_sensor_schema_and_duplicates (test_generator_extension.ConfigurationChecks.test_strict_sensor_schema_and_duplicates) ... ok
+test_validation_does_not_mutate_and_paths_use_config_dir (test_generator_extension.ConfigurationChecks.test_validation_does_not_mutate_and_paths_use_config_dir) ... ok
+test_G1_independent_random_streams (test_generator_extension.GeneratorTasks.test_G1_independent_random_streams) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_G1_lazy_and_reproducible (test_generator_extension.GeneratorTasks.test_G1_lazy_and_reproducible) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_G1_zero_noise_and_supported_ranges (test_generator_extension.GeneratorTasks.test_G1_zero_noise_and_supported_ranges) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_G2_rechecks_after_early_wakeup (test_generator_extension.GeneratorTasks.test_G2_rechecks_after_early_wakeup) ... skipped 'G2: implement wait_until in simulation.py.'
+test_G2_wait_until_and_already_due (test_generator_extension.GeneratorTasks.test_G2_wait_until_and_already_due) ... skipped 'G2: implement wait_until in simulation.py.'
+test_G3_close_releases_open_file (test_generator_extension.GeneratorTasks.test_G3_close_releases_open_file) ... skipped 'G3: implement iter_jsonl in streaming.py.'
+test_G3_empty_file (test_generator_extension.GeneratorTasks.test_G3_empty_file) ... skipped 'G3: implement iter_jsonl in streaming.py.'
+test_G3_line_reader_lazy_and_strict (test_generator_extension.GeneratorTasks.test_G3_line_reader_lazy_and_strict) ... skipped 'G3: implement iter_jsonl in streaming.py.'
+test_G3_missing_file_is_opened_only_when_consumed (test_generator_extension.GeneratorTasks.test_G3_missing_file_is_opened_only_when_consumed) ... skipped 'G3: implement iter_jsonl in streaming.py.'
+test_G4_disabled_calibration_still_copies (test_generator_extension.GeneratorTasks.test_G4_disabled_calibration_still_copies) ... skipped 'G4: implement select_calibrated in streaming.py.'
+test_G4_is_lazy_and_does_not_read_ahead (test_generator_extension.GeneratorTasks.test_G4_is_lazy_and_does_not_read_ahead) ... skipped 'G4: implement select_calibrated in streaming.py.'
+test_G4_selects_before_calibrating_and_preserves_input (test_generator_extension.GeneratorTasks.test_G4_selects_before_calibrating_and_preserves_input) ... skipped 'G4: implement select_calibrated in streaming.py.'
+test_G5_bounded_window_and_warmup (test_generator_extension.GeneratorTasks.test_G5_bounded_window_and_warmup) ... skipped 'G5: implement rolling_windows in streaming.py.'
+test_G5_rejects_invalid_window_size (test_generator_extension.GeneratorTasks.test_G5_rejects_invalid_window_size) ... skipped 'G5: implement rolling_windows in streaming.py.'
+test_G5_rejects_mixed_series (test_generator_extension.GeneratorTasks.test_G5_rejects_mixed_series) ... skipped 'G5: implement rolling_windows in streaming.py.'
+test_G5_snapshot_copies_are_independent (test_generator_extension.GeneratorTasks.test_G5_snapshot_copies_are_independent) ... skipped 'G5: implement rolling_windows in streaming.py.'
+test_G6_flushes_one_line_at_a_time (test_generator_extension.GeneratorTasks.test_G6_flushes_one_line_at_a_time) ... skipped 'G6: implement append_reading in recording.py.'
+test_G6_optional_fsync_and_write_failure (test_generator_extension.GeneratorTasks.test_G6_optional_fsync_and_write_failure) ... skipped 'G6: implement append_reading in recording.py.'
+test_G6_serialise_before_write (test_generator_extension.GeneratorTasks.test_G6_serialise_before_write) ... skipped 'G6: implement append_reading in recording.py.'
+test_atomic_snapshot_replaces_only_complete_json (test_generator_extension.GeneratorTasks.test_atomic_snapshot_replaces_only_complete_json) ... ok
+test_first_measurement_is_at_5_not_0 (test_generator_extension.GeneratorTasks.test_first_measurement_is_at_5_not_0) ... skipped 'G2: implement wait_until in simulation.py.'
+test_independent_intervals_and_stable_ties (test_generator_extension.GeneratorTasks.test_independent_intervals_and_stable_ties) ... skipped 'G2: implement wait_until in simulation.py.'
+test_no_unused_eleventh_measurement (test_generator_extension.GeneratorTasks.test_no_unused_eleventh_measurement) ... skipped 'G2: implement wait_until in simulation.py.'
+test_slow_consumer_does_not_create_synthetic_backlog (test_generator_extension.GeneratorTasks.test_slow_consumer_does_not_create_synthetic_backlog) ... skipped 'G2: implement wait_until in simulation.py.'
+test_snapshot_empty_and_one_sample (test_generator_extension.GeneratorTasks.test_snapshot_empty_and_one_sample) ... ok
+test_archive_includes_unselected_series_and_limit_is_total (test_generator_extension.IntegrationChecks.test_archive_includes_unselected_series_and_limit_is_total) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_ctrl_c_flushes_recording_and_final_metadata (test_generator_extension.IntegrationChecks.test_ctrl_c_flushes_recording_and_final_metadata) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_limit_can_end_before_first_selected_record (test_generator_extension.IntegrationChecks.test_limit_can_end_before_first_selected_record) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_short_real_time_run_archive_and_offline_analysis (test_generator_extension.IntegrationChecks.test_short_real_time_run_archive_and_offline_analysis) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_storage_failure_is_not_a_success (test_generator_extension.IntegrationChecks.test_storage_failure_is_not_a_success) ... skipped 'G1: implement sensor_values in simulation.py.'
+test_all_three_formats_produce_identical_calculations (test_solutions.ApplicationChecks.test_all_three_formats_produce_identical_calculations) ... ok
+test_bad_config_has_nonzero_exit_and_no_outputs (test_solutions.ApplicationChecks.test_bad_config_has_nonzero_exit_and_no_outputs) ... ok
+test_collision_failure_keeps_raw_input_intact (test_solutions.ApplicationChecks.test_collision_failure_keeps_raw_input_intact) ... ok
+test_default_run_from_another_directory (test_solutions.ApplicationChecks.test_default_run_from_another_directory) ... ok
+test_disabled_calibration_and_console_only_logging (test_solutions.ApplicationChecks.test_disabled_calibration_and_console_only_logging) ... ok
+test_explicit_config_argument_is_relative_to_calling_directory (test_solutions.ApplicationChecks.test_explicit_config_argument_is_relative_to_calling_directory) ... ok
+test_finite_assignment_entry_point (test_solutions.ApplicationChecks.test_finite_assignment_entry_point) ... ok
+test_importing_both_entry_points_does_not_create_outputs (test_solutions.ApplicationChecks.test_importing_both_entry_points_does_not_create_outputs) ... ok
+test_missing_config_and_extra_arguments_are_not_silently_ignored (test_solutions.ApplicationChecks.test_missing_config_and_extra_arguments_are_not_silently_ignored) ... ok
+test_missing_input_and_invalid_measurement_fail_visibly (test_solutions.ApplicationChecks.test_missing_input_and_invalid_measurement_fail_visibly) ... ok
+test_missing_selection_is_successfully_saved_as_empty (test_solutions.ApplicationChecks.test_missing_selection_is_successfully_saved_as_empty) ... ok
+test_successful_runs_preserve_input_and_append_log_once (test_solutions.ApplicationChecks.test_successful_runs_preserve_input_and_append_log_once) ... ok
+test_absolute_paths_and_null_logging (test_solutions.ConfigurationChecks.test_absolute_paths_and_null_logging) ... ok
+test_all_outputs_are_prevented_from_overwriting_config (test_solutions.ConfigurationChecks.test_all_outputs_are_prevented_from_overwriting_config) ... ok
+test_all_six_pairs_of_destinations_are_checked (test_solutions.ConfigurationChecks.test_all_six_pairs_of_destinations_are_checked) ... ok
+test_bad_config_json_reports_filename (test_solutions.ConfigurationChecks.test_bad_config_json_reports_filename) ... ok
+test_disabled_calibration_still_requires_valid_coefficients (test_solutions.ConfigurationChecks.test_disabled_calibration_still_requires_valid_coefficients) ... ok
+test_each_section_must_be_an_object (test_solutions.ConfigurationChecks.test_each_section_must_be_an_object) ... ok
+test_each_section_rejects_missing_and_unknown_keys (test_solutions.ConfigurationChecks.test_each_section_rejects_missing_and_unknown_keys) ... ok
+test_exact_choices_reject_wrong_case_and_containers (test_solutions.ConfigurationChecks.test_exact_choices_reject_wrong_case_and_containers) ... ok
+test_no_implicit_numeric_or_boolean_conversion (test_solutions.ConfigurationChecks.test_no_implicit_numeric_or_boolean_conversion) ... ok
+test_paths_are_absolute_independent_copies_without_output_creation (test_solutions.ConfigurationChecks.test_paths_are_absolute_independent_copies_without_output_creation) ... ok
+test_valid_strings_keep_their_spelling (test_solutions.ConfigurationChecks.test_valid_strings_keep_their_spelling) ... ok
+test_whitespace_only_text_and_non_text_paths_are_rejected (test_solutions.ConfigurationChecks.test_whitespace_only_text_and_non_text_paths_are_rejected) ... ok
+test_all_three_identity_parts_keep_groups_separate (test_solutions.ReaderAndAnalysisChecks.test_all_three_identity_parts_keep_groups_separate) ... ok
+test_analysis_and_processing_do_not_mutate_any_inputs (test_solutions.ReaderAndAnalysisChecks.test_analysis_and_processing_do_not_mutate_any_inputs) ... ok
+test_disabled_calibration_does_not_alias_raw_dictionaries (test_solutions.ReaderAndAnalysisChecks.test_disabled_calibration_does_not_alias_raw_dictionaries) ... ok
+test_empty_jsonl_is_a_valid_empty_dataset (test_solutions.ReaderAndAnalysisChecks.test_empty_jsonl_is_a_valid_empty_dataset) ... ok
+test_empty_selection_keeps_requested_calibration_flag (test_solutions.ReaderAndAnalysisChecks.test_empty_selection_keeps_requested_calibration_flag) ... ok
+test_even_median_and_sample_standard_deviation (test_solutions.ReaderAndAnalysisChecks.test_even_median_and_sample_standard_deviation) ... ok
+test_exploration_compares_instants_not_time_text (test_solutions.ReaderAndAnalysisChecks.test_exploration_compares_instants_not_time_text) ... ok
+test_grouping_rejects_inconsistent_units (test_solutions.ReaderAndAnalysisChecks.test_grouping_rejects_inconsistent_units) ... ok
+test_identity_calibration_still_returns_a_new_record (test_solutions.ReaderAndAnalysisChecks.test_identity_calibration_still_returns_a_new_record) ... ok
+test_json_rejects_all_non_array_containers (test_solutions.ReaderAndAnalysisChecks.test_json_rejects_all_non_array_containers) ... ok
+test_json_syntax_and_bad_item_have_context (test_solutions.ReaderAndAnalysisChecks.test_json_syntax_and_bad_item_have_context) ... ok
+test_jsonl_invalid_object_reports_physical_line (test_solutions.ReaderAndAnalysisChecks.test_jsonl_invalid_object_reports_physical_line) ... ok
+test_missing_inputs_raise_instead_of_returning_empty_data (test_solutions.ReaderAndAnalysisChecks.test_missing_inputs_raise_instead_of_returning_empty_data) ... ok
+test_nonfinite_calibration_result_is_rejected (test_solutions.ReaderAndAnalysisChecks.test_nonfinite_calibration_result_is_rejected) ... ok
+test_office_temperature_is_not_the_laboratory_average (test_solutions.ReaderAndAnalysisChecks.test_office_temperature_is_not_the_laboratory_average) ... ok
+test_pipeline_consumes_original_source_only_once (test_solutions.ReaderAndAnalysisChecks.test_pipeline_consumes_original_source_only_once) ... ok
+test_bad_jsonl_value_does_not_truncate_old_snapshot (test_solutions.StorageAndLoggingChecks.test_bad_jsonl_value_does_not_truncate_old_snapshot) ... ok
+test_both_record_writers_round_trip_calibrated_unicode_data (test_solutions.StorageAndLoggingChecks.test_both_record_writers_round_trip_calibrated_unicode_data) ... ok
+test_invalid_log_levels_do_not_create_output (test_solutions.StorageAndLoggingChecks.test_invalid_log_levels_do_not_create_output) ... ok
+test_logging_reconfiguration_has_one_console_and_one_file (test_solutions.StorageAndLoggingChecks.test_logging_reconfiguration_has_one_console_and_one_file) ... INFO | check | Zażółć-one
+INFO | check | Zażółć-two
+ok
+
+----------------------------------------------------------------------
+Ran 118 tests in 12.671s
+
+OK (skipped=28)
