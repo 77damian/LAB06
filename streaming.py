@@ -35,11 +35,27 @@ Do not use the older select_series: it builds a complete list. Never apply this
 series' calibration coefficients to another metric or station.
 """
     # TODO G4: your implementation begins here.
+    
+    room = selection["room"]
+    sensor_id = selection["sensor_id"]
+    metric = selection["metric"]
+    
     # Filter lazily using the complete room/sensor_id/metric identity.
     # For matching records, yield a calibrated new record or an unchanged copy.
     # Reuse calibrate_reading; never materialise the incoming iterable.
-    raise NotImplementedError("G4: implement select_calibrated in streaming.py.")
-    yield {}  # Unreachable marker: preserve generator behaviour until implemented.
+
+    for r in readings:
+        if (r["room"] == room and r["sensor_id"] == sensor_id and r["metric"] == metric):
+            if calibration["enabled"]:
+                yield calibrate_reading(r,calibration["scale"],calibration["offset"])
+            else:
+                yield r.copy()
+    
+    # r aise NotImplementedError("G4: implement select_calibrated in streaming.py.")
+    # yield {}  # Unreachable marker: preserve generator behaviour until implemented.
+    
+    
+    
 
 
 def rolling_windows(readings: Iterable[dict], size: int) -> Iterator[list[dict]]:
