@@ -19,12 +19,14 @@ def iter_jsonl(path: Path) -> Iterator[dict]:
 Ignore blank lines; report the line number on invalid input. Exhaust or close
 this generator to close its file. This is a replay reader, not a file-tail service.
 """
-    # TODO G3: your implementation begins here.
-    # Open the file with a with block inside this generator.
-    # Skip blank lines; decode and parse one record at a time.
-    # Report bad rows with filename/line number, then yield valid records.
-    raise NotImplementedError("G3: implement iter_jsonl in streaming.py.")
-    yield {}  # Unreachable marker: preserve generator behaviour until implemented.
+    with Path(path).open(encoding="utf-8") as stream:
+        for number, line in enumerate(stream, start=1):
+            if not line.strip():
+                continue
+            try:
+                yield parse_record(json.loads(line))
+            except ValueError as error:
+                raise ValueError(f"{path}: JSON Lines line {number}: {error}") from error
 
 
 def select_calibrated(readings: Iterable[dict], selection: dict,
