@@ -14,17 +14,22 @@ from records import UNITS, parse_record
 
 
 def sensor_values(sensor: dict) -> Iterator[float]:
-    """TASK G1: yield seeded noisy values forever, retaining no history.
+    """Yield seeded noisy values forever, retaining no history.
 
 Use a private Random instance, not random.seed(). Temperature is in C, humidity
 in percent, pressure in hPa. The clipping is a teaching model, not sensor physics.
 """
-    # TODO G1: your implementation begins here.
-    # Create your own random.Random using sensor["seed"].
-    # In an infinite loop, sample, check finiteness, apply the metric limits,
-    # and yield one float. Do not sleep or accumulate a list here.
-    raise NotImplementedError("G1: implement sensor_values in simulation.py.")
-    yield 0.0  # Unreachable marker: preserve generator behaviour until implemented.
+    rng = random.Random(sensor["seed"])  # Private; created on first next().
+    mean, noise_std, metric = sensor["mean"], sensor["noise_std"], sensor["metric"]
+    while True:
+        value = rng.gauss(mean, noise_std)
+        if not isfinite(value):
+            raise ValueError(f"Generated nonfinite value for {metric!r} sensor.")
+        if metric == "humidity":
+            value = min(max(value, 0.0), 100.0)
+        elif metric == "pressure":
+            value = max(value, 0.0)
+        yield float(value)
 
 
 def wait_until(deadline: float, clock: Callable = time.monotonic,

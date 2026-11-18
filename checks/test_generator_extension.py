@@ -409,7 +409,7 @@ class ConfigurationChecks(unittest.TestCase):
             self.assertNotEqual(one,two)
             for path in [one,two]:
                 offline=load_run_config(path/'offline_config.json')
-                self.assertEqual(offline['input']['path'],path/'raw.jsonl')
+                self.assertEqual(Path(offline['input']['path']).resolve(),(path/'raw.jsonl').resolve())
                 self.assertEqual(offline['mode'],'files')
 
 
