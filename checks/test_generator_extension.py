@@ -127,6 +127,62 @@ class GeneratorTasks(unittest.TestCase):
         self.assertEqual(len(clock.waits), 5)
 
     @exercise
+    def test_G2_deadline_exactly_now_does_not_sleep(self):
+        clock = Clock()
+        clock.value = 7.0
+        wait_until(7.0, clock, clock.sleep)
+        self.assertEqual(clock.waits, [])
+        self.assertEqual(clock.value, 7.0)
+
+    @exercise
+    def test_G2_deadline_is_absolute_not_a_duration(self):
+        clock = Clock()
+        clock.value = 10.0
+        wait_until(15.0, clock, clock.sleep)
+        self.assertEqual(clock.waits, [5.0])
+        self.assertEqual(clock.value, 15.0)
+
+    @exercise
+    def test_G2_late_wakeup_stops_waiting(self):
+        clock = Clock()
+        calls = []
+        def late(delay):
+            calls.append(delay)
+            clock.sleep(delay + 3)  # the OS wakes us after the deadline
+        wait_until(5, clock, late)
+        self.assertEqual(calls, [5])
+        self.assertEqual(clock.value, 8)
+
+    @exercise
+    def test_G2_sleeps_only_for_remaining_time(self):
+        clock = Clock()
+        steps = iter([1.0, 0.5, 100.0])  # early, early, then past the deadline
+        def uneven(delay):
+            clock.sleep(next(steps))
+        wait_until(4, clock, uneven)
+        # Each request is exactly deadline minus the current time.
+        self.assertEqual(clock.waits, [1.0, 0.5, 100.0])
+        recorded = []
+        clock2 = Clock()
+        steps2 = iter([1.0, 0.5, 100.0])
+        def spy(delay):
+            recorded.append(delay)
+            clock2.sleep(next(steps2))
+        wait_until(4, clock2, spy)
+        self.assertEqual(recorded, [4, 3, 2.5])
+
+    @exercise
+    def test_G2_does_not_call_clock_after_deadline_reached_without_sleep(self):
+        readings = []
+        def fixed_clock():
+            readings.append(1)
+            return 100.0
+        def forbidden_sleep(delay):
+            raise AssertionError('Must not sleep when the deadline has passed.')
+        wait_until(50.0, fixed_clock, forbidden_sleep)
+        self.assertEqual(len(readings), 1)
+
+    @exercise
     def test_first_measurement_is_at_5_not_0(self):
         clock = Clock()
         stream = simulate_sensors([sensor()], clock=clock, sleep=clock.sleep, now=clock.now)

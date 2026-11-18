@@ -39,11 +39,10 @@ def wait_until(deadline: float, clock: Callable = time.monotonic,
 Recheck after sleeping. An OS can wake us late; a test sleeper can wake us early.
 Neither case should cause us to deliberately emit before the deadline.
 """
-    # TODO G2: your implementation begins here.
-    # Subtract clock() from deadline to find the remaining delay.
-    # While it is positive, call sleep(remaining), then check the clock again.
-    # Never busy-wait or request a negative sleep.
-    raise NotImplementedError("G2: implement wait_until in simulation.py.")
+    remaining = deadline - clock()
+    while remaining > 0:
+        sleep(remaining)
+        remaining = deadline - clock()
 
 
 def utc_now() -> datetime:
