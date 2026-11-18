@@ -54,8 +54,23 @@ standard deviation. Do not mix series; do not leak mutable window state.
     # Validate size, create a deque(maxlen=size), and keep one series/unit only.
     # Store copies, then yield a new list of record copies after every input.
     # Keep warm-up windows and do not retain the whole history.
-    raise NotImplementedError("G5: implement rolling_windows in streaming.py.")
-    yield []  # Unreachable marker: preserve generator behaviour until implemented.
+    if type(size) is not int or size < 1: 
+      raise ValueError
+    
+
+    series = None
+    window = deque(maxlen=size)
+
+    for reading in readings:
+        row = reading.copy()
+        identity = (row["room"], row["sensor_id"], row["metric"], row["unit"])
+        if series is None:
+            series = identity
+        elif identity != series:
+            raise ValueError("rolling_windows only accepts one series at a time.")
+
+        window.append(row)
+        yield list(record.copy() for record in window)
 
 
 def build_snapshot(window: list[dict], selection: dict, calibration: dict,
