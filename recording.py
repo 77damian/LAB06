@@ -23,7 +23,10 @@ continuing silently would make a monitor appear healthy while losing its archive
     # Serialise before writing (allow_nan=False), then add one newline.
     # Write and flush each record; call os.fsync only when requested.
     # The caller owns the file handle. Do not catch and hide I/O errors.
-    raise NotImplementedError("G6: implement append_reading in recording.py.")
+    stream.write(json.dumps(reading, allow_nan=False) + "\n")
+    stream.flush()
+    if fsync:
+        os.fsync(stream.fileno())
 
 
 def write_snapshot(path: Path, document: dict) -> None:
