@@ -6,6 +6,7 @@ under config/. Importing this module starts neither acquisition nor file writing
 import argparse
 import logging
 from pathlib import Path
+import signal
 
 from file_workflow import run_files
 from logging_service import configure_logging
@@ -15,6 +16,8 @@ from run_stream import run_simulation
 ROOT = Path(__file__).resolve().parent
 LOGGER = logging.getLogger(__name__)
 
+def _sigterm_to_keyboard_interrupt(signum, frame):
+    raise KeyboardInterrupt
 
 def main(config_path: Path = ROOT / "config" / "example.json") -> None:
     """Validate first, configure logging once, then choose one visible workflow."""
@@ -24,7 +27,12 @@ def main(config_path: Path = ROOT / "config" / "example.json") -> None:
     if config["mode"] == "files":
         run_files(config)
     else:
-        run_simulation(config)
+        previous_handler = signal.signal(signal.SIGTERM, _sigterm_to_keyboard_interrupt)
+        try:
+            run_simulation(config)
+        finally:
+            signal.signal(signal.SIGTERM, previous_handler)
+
 
 
 if __name__ == "__main__":

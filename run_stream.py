@@ -8,13 +8,14 @@ from itertools import islice
 import logging
 from pathlib import Path
 import time
+import os
 
 from recording import append_reading, create_session, serialisable_config, write_snapshot
 from simulation import simulate_sensors
 from streaming import build_snapshot, rolling_windows, select_calibrated
+from sqlite_sink import SqliteSink
 
 LOGGER = logging.getLogger(__name__)
-
 
 def run_simulation(config: dict) -> Path:
     """Run until a count limit or Ctrl+C; archive raw data before processing it."""
@@ -40,18 +41,22 @@ def run_simulation(config: dict) -> Path:
     source = simulate_sensors(config["simulation"]["sensors"])
     limit = config["simulation"]["max_readings"]
     incoming = source if limit is None else islice(source, limit)
+
+    
     try:
+        db_path = os.environ.get("DB_PATH")
+        if db_path:
+            sink = SqliteSink(db_path)
         # Exclusive creation protects an existing archive; this handle stays open.
         with raw_path.open("x", encoding="utf-8", newline="\n") as output:
             def record_incoming():
-                """A deliberate side-effecting generator: record, then pass through."""
                 nonlocal count
                 for raw in incoming:
                     append_reading(output, raw, config["recording"]["fsync"])
                     count += 1
-                    # DEBUG is optional; raw.jsonl is the data, not this text log.
-                    LOGGER.debug("Recorded %s / %s / %s", raw["room"],
-                                 raw["sensor_id"], raw["metric"])
+                    if sink is not None:
+                        sink.write(raw)
+                    LOGGER.debug("Recorded %s / %s / %s", raw["room"], raw["sensor_id"], raw["metric"])
                     yield raw
 
             # The raw archive is UPSTREAM of selection: other sensors are not lost.
