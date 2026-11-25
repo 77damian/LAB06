@@ -1,0 +1,28 @@
+services:
+  collector:
+    build: {context: ., dockerfile: Dockerfile.collector}
+    command: python run.py config/simulation_24h.json
+    env_file: .env
+    volumes:
+      - dbdata:/data
+      - ./output:/app/output
+    restart: unless-stopped
+    stop_grace_period: 15s            # time to flush the SQLite buffer on SIGTERM
+
+  dashboard:
+    build: {context: ., dockerfile: Dockerfile.dashboard}
+    env_file: .env
+    volumes:
+      - dbdata:/data                  # NOT :ro, WAL readers must touch the -shm file
+    ports:
+      - "${DASHBOARD_PORT:-8501}:8501"
+    depends_on: [collector]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8501/_stcore/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  dbdata: {}

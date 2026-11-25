@@ -1,0 +1,13 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+output
+checks
+docs
+data
+validation
+.env
