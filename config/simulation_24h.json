@@ -1,0 +1,65 @@
+{
+  "mode": "simulation",
+  "simulation": {
+    "max_readings": null,
+    "sensors": [
+      {
+        "room": "laboratory",
+        "sensor_id": "station-01",
+        "metric": "temperature",
+        "interval_seconds": 5.0,
+        "mean": 21.0,
+        "noise_std": 0.08,
+        "seed": 42
+      },
+      {
+        "room": "laboratory",
+        "sensor_id": "station-01",
+        "metric": "humidity",
+        "interval_seconds": 10.0,
+        "mean": 45.0,
+        "noise_std": 0.25,
+        "seed": 43
+      },
+      {
+        "room": "laboratory",
+        "sensor_id": "station-01",
+        "metric": "pressure",
+        "interval_seconds": 30.0,
+        "mean": 1013.0,
+        "noise_std": 0.1,
+        "seed": 44
+      },
+      {
+        "room": "office",
+        "sensor_id": "station-02",
+        "metric": "temperature",
+        "interval_seconds": 10.0,
+        "mean": 23.0,
+        "noise_std": 0.1,
+        "seed": 45
+      }
+    ]
+  },
+  "recording": {
+    "directory": "../output/sessions",
+    "fsync": false
+  },
+  "stream": {
+    "window_size": 30
+  },
+  "selection": {
+    "room": "laboratory",
+    "sensor_id": "station-01",
+    "metric": "temperature"
+  },
+  "calibration": {
+    "enabled": false,
+    "scale": 1.0,
+    "offset": 0.0
+  },
+  "logging": {
+    "level": "INFO",
+    "path": "../output/simulation.log"
+  }
+}

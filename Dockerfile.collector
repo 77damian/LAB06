@@ -1,0 +1,7 @@
+FROM python:3.12-slim
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+WORKDIR /app
+COPY *.py schema.sql ./
+COPY config ./config
+# Config paths are relative to config/, so sessions and logs land in /app/output.
+CMD ["python", "run.py", "config/simulation_24h.json"]
